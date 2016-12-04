@@ -14,5 +14,7 @@ pip install pymongo
 ```
 
 #WRC setup
+```
 download sqlAlchemy
 http://www.sqlalchemy.org/download.html
+```
