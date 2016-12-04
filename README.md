@@ -1,4 +1,16 @@
-# MANA
+#**MANA: My Adaptive News Aggregator**
 
-Samuelson says: "Dude! A suh!"
-498 - NLP - My Adaptive News Aggregator
+##**Mongo setup**
+
+Install MongoDB for OSX:
+```
+brew update
+brew install mongodb
+```
+
+Install PyMongo: 
+```
+pip install pymongo
+```
+
+
