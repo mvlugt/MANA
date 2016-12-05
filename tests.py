@@ -17,10 +17,14 @@ def test_get_user():
 
 def test_update_user():
     _user = db.create_user("test1")
-    _user.keywords["key1"] = 1
+    _user.keywords["key1"] = {
+        "term_frequency": 1,
+        "num_docs": 2
+    }
     db.update_user(_user)
     result = db.get_user("test1")
-    assert result.keywords["key1"] == 1
+    assert result.keywords["key1"]["term_frequency"] == 1
+    assert result.keywords["key1"]["num_docs"] == 2
     db.delete_user("test1")
 
 

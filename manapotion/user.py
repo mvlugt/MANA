@@ -19,12 +19,6 @@ class User:
         }
 
 
-class WordStats:
-    def __init__(self, term_frequency, num_articles):
-        self.term_frequency = term_frequency
-        self.num_articles = num_articles
-
-
 def from_dict(_dict):
     user = User(_dict["fb_id"])
     user.keywords = _dict["keywords"]
@@ -34,6 +28,9 @@ def from_dict(_dict):
 
 def safe_increment(keywords, keyword, amount):
     if keyword not in keywords:
-        keywords[keyword] = WordStats(0, 0)
-    keywords[keyword].term_frequency += amount
-    keywords[keyword].num_articles += 1
+        keywords[keyword] = {
+            "term_frequency": 0,
+            "num_docs": 0
+        }
+    keywords[keyword]["term_frequency"] += amount
+    keywords[keyword]["num_docs"] += 1
