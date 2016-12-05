@@ -1,16 +1,25 @@
-from bs4 import BeautifulSoup
-from urllib import request
+# this module exposes methods for getting statistics from articles and retrieving articles for users
 import json
+
+from urllib import request
 from newspaper import Article
 
-# Install newspaper for OSX 
-# $ brew install libxml2 libxslt
-# $ brew install libtiff libjpeg webp little-cms2
-# $ pip3 install newspaper3k
-# $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python3
+
+def get_stats(url):
+    # get article
+    article = __get_parsed_article(url)
+    # get tf counts for all keywords
+    keywords = {}
+    for keyword in article.keywords:
+        __safe_increment(keywords, keyword)
+    return keywords
 
 
-def get_article_urls():
+def get_relevant_urls(user):
+    raise NotImplementedError
+
+
+def __get_article_urls():
     url = "https://newsapi.org/v1/articles?source=techcrunch&apiKey=66e0dd0ca71043c09db31c1733d53a7e"
     response = str(request.urlopen(url).read().decode('utf-8'))
     response = str(response.encode('utf-8', 'replace'))
@@ -24,7 +33,8 @@ def get_article_urls():
     article_urls = [article["url"] for article in response_json["articles"]]
     return article_urls
 
-def get_parsed_articles(article_urls):
+
+def __get_parsed_articles(article_urls):
     articles = []
     for url in article_urls:
         article = Article(url)
@@ -34,13 +44,15 @@ def get_parsed_articles(article_urls):
         # Hack to detect parsing error for now
         if article.title != "":
             articles.append(article)
+        article.nlp()
     return articles
 
-def main():
-    article_urls = get_article_urls()
-    parsed_articles = get_parsed_articles(article_urls)
-    # NLP Example:
-    for article in parsed_articles:
-        article.nlp()
-        print(article.keywords)
-main()
+
+def __get_parsed_article(url):
+    return __get_parsed_articles([url])[0]
+
+
+def __safe_increment(_dict, key):
+    if key not in _dict:
+        _dict[key] = 0
+    _dict[key] += 1
