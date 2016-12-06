@@ -84,8 +84,7 @@ def __get_article_urls(source):
 def __get_clean_json(url):
     response = str(request.urlopen(url).read().decode('utf-8'))
     response = str(response.encode('utf-8', 'replace'))
-    response = response[2:]
-    response = response[:-1]
+    response = response[2:-1]
     new_response = ""
     was_backslash = [False]
     for character in response:
