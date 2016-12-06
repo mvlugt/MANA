@@ -1,4 +1,5 @@
 from manapotion import db
+from manapotion import content
 
 
 def test_create_user():
@@ -34,7 +35,16 @@ def db_test_suite():
     test_update_user()
 
 
+def test_get_stats():
+    print(repr(content.get_stats("https://techcrunch.com/2016/12/05/flutterwave-aims-to-unify-africas-fragmented-payment-systems-and-empower-small-businesses/")))
+
+
+def content_test_suite():
+    test_get_stats()
+
+
 def main():
     db_test_suite()
+    content_test_suite()
 
 main()

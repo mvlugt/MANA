@@ -9,9 +9,7 @@ def get_stats(url):
     # get article
     article = __get_parsed_article(url)
     # get tf counts for all keywords
-    keywords = {}
-    for keyword in article.keywords:
-        __safe_increment(keywords, keyword)
+    keywords = __get_keyword_counts(article.keywords, __get_clean_text(article.text))
     return keywords
 
 
@@ -52,7 +50,39 @@ def __get_parsed_article(url):
     return __get_parsed_articles([url])[0]
 
 
+def __get_keyword_counts(article_keywords, article_text):
+    article_keywords_set = set(article_keywords)
+    keywords = {}
+    for word in article_text:
+        if word in article_keywords_set:
+            __safe_increment(keywords, word)
+    return keywords
+
+
 def __safe_increment(_dict, key):
     if key not in _dict:
         _dict[key] = 0
     _dict[key] += 1
+
+
+def __get_clean_text(text):
+    legal_text = ""
+    for character in text:
+        if 0 <= ord(character) < 256:
+            legal_text += character
+    split_text = legal_text.split(' ')
+    result_text = []
+    for word in split_text:
+        mutable_word = [word]
+        mutable_word[0] = mutable_word[0].lstrip('\n')
+        mutable_word[0] = mutable_word[0].rstrip('\n')
+        if len(mutable_word[0]) > 0 and not mutable_word[0][0].isalnum():
+            mutable_word[0] = mutable_word[0][1:]
+        if len(mutable_word[0]) > 0 and not mutable_word[0][-1].isalnum():
+            mutable_word[0] = mutable_word[0][:-1]
+        if len(mutable_word[0]) > 0:
+            result_text.append(mutable_word[0].lower())
+    return result_text
+
+
+
