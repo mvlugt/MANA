@@ -1,4 +1,5 @@
 # defines the User class
+import math
 
 
 class User:
@@ -10,6 +11,7 @@ class User:
     def update_stats(self, keywords):
         for word in keywords:
             safe_increment(self.keywords, word, keywords[word])
+        self.num_docs_liked += 1
 
     def as_dict(self):
         return {
@@ -17,6 +19,14 @@ class User:
             "keywords": self.keywords,
             "num_docs_liked": self.num_docs_liked
         }
+
+    def get_centroid(self):
+        centroid = []
+        for keyword in self.keywords.keys():
+            tf = self.keywords[keyword]["term_frequency"]
+            log_prob = math.log2(float(self.num_docs_liked) / float(self.keywords[keyword]["num_docs"])) if self.num_docs_liked > 0 else 0
+            centroid.append(tf * log_prob)
+        return centroid
 
 
 def from_dict(_dict):
