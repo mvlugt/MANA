@@ -1,0 +1,5 @@
+Quality:
+Update data
+Fix and test quality classifier
+Figure out how to persist classifier
+Write filter function
