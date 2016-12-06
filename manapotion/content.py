@@ -93,9 +93,6 @@ def __get_clean_json(url):
             was_backslash[0] = False
         else:
             was_backslash[0] = True
-    print(new_response)
-    print(str(len(new_response)))
-    print(new_response[6770:6773])
     return json.loads(new_response)
 
 
@@ -107,12 +104,12 @@ def __get_parsed_articles(article_urls):
         try:
             article.download()
             article.parse()
+            article.nlp()
         except ArticleException:
             continue
         # Hack to detect parsing error for now
         if article.title != "":
             articles.append(article)
-        article.nlp()
     return articles
 
 
