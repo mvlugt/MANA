@@ -43,8 +43,6 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-
-                    send_message(sender_id, "this is a test")
                     current_user = db.get_user(sender_id)
                     # If current_user returns null, then this user does not exist in our database yet
                     if not current_user:
