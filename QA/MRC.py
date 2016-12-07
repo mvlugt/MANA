@@ -38,7 +38,9 @@ def queryDB(word, session):
             filter(Word.cap != "C").order_by(desc(Word.fam)).first()
 
     features = []
-    #not every item in dictionary is totally annotated
-    if item.fam != 0 or item.imag != 0 or item.conc != 0:
-        features.extend([item.fam, item.imag, item.conc])
+    #not every word is in dictionary
+    if item is not None:
+        #not every item in dictionary is totally annotated
+        if item.fam != 0 or item.imag != 0 or item.conc != 0:
+            features.extend([item.fam, item.imag, item.conc])
     return features
