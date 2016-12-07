@@ -43,4 +43,5 @@ def __get_profile_collection():
                      connectTimeoutMS=30000,
                      socketTimeoutMS=None,
                      socketKeepAlive=True)
+    db = client.get_default_database()
     return db.UserProfile
