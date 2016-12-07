@@ -62,14 +62,16 @@ def webhook():
                         articles_user_likes = [int(s) for s in message_text.split() if s.isdigit()]
                         send_message(sender_id, "Thanks for giving me that feedback.")
                         for index in articles_user_likes:
+                            log("updating user profile")
                             # For each article the user likes, grab the keywords and update the user profile
                             url = ARTICLES[index]
                             key_words = content.get_stats(url)
                             db.update_stats(sender_id, key_words)
                         
                         # This should reflect the updated user profile
+                        log("attempting to get relevant urls")
                         ARTICLES = content.get_relevant_urls(user)
-
+                        log("got articles")
 
                         send_message(sender_id, "I found these articles I thought you might like. As always, please let me know which articles interested you most")
                         article_list_message = ""
