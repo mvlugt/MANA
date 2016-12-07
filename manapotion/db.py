@@ -38,7 +38,9 @@ def delete_user(fb_id):
 
 
 def __get_profile_collection():
-    mongohq_url = os.environ['MONGOHQ_URL']
-    client = MongoClient(mongohq_url)
-    db = client.MANA_DB
+    mongolab_uri = os.environ['MONGODB_URI']
+    client = MongoClient(mongolab_uri,
+                     connectTimeoutMS=30000,
+                     socketTimeoutMS=None,
+                     socketKeepAlive=True)
     return db.UserProfile
