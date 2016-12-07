@@ -1,5 +1,15 @@
 #**MANA: My Adaptive News Aggregator**
 
+##*NewsPaper Setup - for OSX *
+Using Homebrew or Macports
+
+```
+$ brew install libxml2 libxslt
+$ brew install libtiff libjpeg webp little-cms2
+$ pip3 install newspaper3k
+$ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python3
+```
+
 ##**Mongo setup**
 
 Install MongoDB for OSX:
