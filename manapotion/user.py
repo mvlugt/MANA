@@ -24,7 +24,7 @@ class User:
         centroid = []
         for keyword in self.keywords.keys():
             tf = self.keywords[keyword]["term_frequency"]
-            log_prob = math.log2(float(self.num_docs_liked) / float(self.keywords[keyword]["num_docs"])) if self.num_docs_liked > 0 else 0
+            log_prob = math.fabs(math.log2(float(self.num_docs_liked) / float(self.keywords[keyword]["num_docs"]))) if self.num_docs_liked > 0 else 0
             centroid.append(tf * log_prob)
         return centroid
 

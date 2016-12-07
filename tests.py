@@ -65,9 +65,36 @@ def test_get_urls():
     print(repr(content.get_relevant_urls(test_user)))
 
 
+def test_get_top_urls():
+    test_user = User(1)
+    test_user = User(1)
+    test_user.num_docs_liked = 7
+    test_user.keywords = {
+        "computer": {
+            "term_frequency": 10,
+            "num_docs": 4
+        },
+        "technology": {
+            "term_frequency": 17,
+            "num_docs": 3
+        },
+        "payment": {
+            "term_frequency": 32,
+            "num_docs": 5
+        },
+        "business": {
+            "term_frequency": 50,
+            "num_docs": 6
+        }
+    }
+    print(repr(content.get_top_urls(["https://www.bluetooth.com/news/pressreleases/2016/12/07/bluetooth-5-now-available",
+                                     "http://www.businessinsider.com/amazon-payments-way-ahead-of-apple-and-google-2016-12"], test_user, 2)))
+
+
 def content_test_suite():
-    test_get_stats()
-    test_get_urls()
+    # test_get_stats()
+    # test_get_urls()
+    test_get_top_urls()
 
 
 def main():

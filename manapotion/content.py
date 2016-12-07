@@ -11,6 +11,10 @@ from newspaper import ArticleException
 def get_stats(url):
     # get article
     article = __get_parsed_article(url)
+    try:
+        article.nlp()
+    except ArticleException:
+        return
     # get tf counts for all keywords
     keywords = __get_keyword_counts(article.keywords, article.text)
     return keywords
@@ -21,6 +25,11 @@ def get_relevant_urls(user):
     articles = __get_corpus()
     # find cosine similarity for each article, keep top n
     return __top_n_articles(articles, user, 5)
+
+
+def get_top_urls(urls, user, n):
+    articles = __get_parsed_articles(urls)
+    return __top_n_articles(articles, user, n)
 
 
 def __top_n_articles(articles, user, num_articles):
@@ -34,7 +43,7 @@ def __top_n_articles(articles, user, num_articles):
             heapq.heappush(heap, result)
     urls = []
     while len(heap) > 0:
-        urls.append(heap[0][1])
+        urls.append(heap[0])
         heapq.heappop(heap)
     return urls
 
@@ -54,7 +63,7 @@ def __get_article_centroid(article, user):
     total_doc_count = user.num_docs_liked + 1
     for keyword in user.keywords.keys():
         word_doc_count = user.keywords[keyword]["num_docs"] + 1 if article_keyword_counts[keyword] > 0 else user.keywords[keyword]["num_docs"]
-        result = math.log2(float(article_keyword_counts[keyword]) / (float(total_doc_count) / float(word_doc_count))) if article_keyword_counts[keyword] > 0 else 0
+        result = math.fabs(math.log2(float(article_keyword_counts[keyword]) / (float(total_doc_count) / float(word_doc_count)))) if article_keyword_counts[keyword] > 0 else 0
         centroid.append(result)
     return centroid
 
@@ -104,7 +113,7 @@ def __get_parsed_articles(article_urls):
         try:
             article.download()
             article.parse()
-            article.nlp()
+            # article.nlp()
         except ArticleException:
             continue
         # Hack to detect parsing error for now
