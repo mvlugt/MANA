@@ -1,6 +1,7 @@
 # surfaces methods for interacting with the database
 
 from pymongo import MongoClient
+import os
 
 from . import user
 
@@ -37,7 +38,7 @@ def delete_user(fb_id):
 
 
 def __get_profile_collection():
-    mongohq_url = ENV['MONGOHQ_URL']
+    mongohq_url = os.environ['MONGOHQ_URL']
     client = MongoClient(mongohq_url)
     db = client.MANA_DB
     return db.UserProfile
