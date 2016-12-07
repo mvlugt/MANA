@@ -37,6 +37,7 @@ def delete_user(fb_id):
 
 
 def __get_profile_collection():
-    client = MongoClient("localhost", 27017)
+    mongohq_url = ENV['MONGOHQ_URL']
+    client = MongoClient(mongohq_url)
     db = client.MANA_DB
     return db.UserProfile
