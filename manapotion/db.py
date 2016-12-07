@@ -1,6 +1,7 @@
 # surfaces methods for interacting with the database
 
 from pymongo import MongoClient
+import os
 
 from . import user
 
@@ -37,6 +38,10 @@ def delete_user(fb_id):
 
 
 def __get_profile_collection():
-    client = MongoClient("localhost", 27017)
-    db = client.MANA_DB
+    mongolab_uri = os.environ['MONGODB_URI']
+    client = MongoClient(mongolab_uri,
+                     connectTimeoutMS=30000,
+                     socketTimeoutMS=None,
+                     socketKeepAlive=True)
+    db = client.get_default_database()
     return db.UserProfile

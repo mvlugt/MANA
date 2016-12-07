@@ -117,7 +117,8 @@ def __get_parsed_articles(article_urls):
         except ArticleException:
             continue
         # Hack to detect parsing error for now
-        if article.title != "":
+        if article.title != "": 
+            article.nlp()
             articles.append(article)
     return articles
 
