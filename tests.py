@@ -1,4 +1,7 @@
 from manapotion import db
+from manapotion import content
+from manapotion import user
+User = user.User
 
 
 def test_create_user():
@@ -34,7 +37,41 @@ def db_test_suite():
     test_update_user()
 
 
+def test_get_stats():
+    print(repr(content.get_stats("https://techcrunch.com/2016/12/05/flutterwave-aims-to-unify-africas-fragmented-payment-systems-and-empower-small-businesses/")))
+
+
+def test_get_urls():
+    test_user = User(1)
+    test_user.num_docs_liked = 7
+    test_user.keywords = {
+        "computer": {
+            "term_frequency": 10,
+            "num_docs": 4
+        },
+        "technology": {
+            "term_frequency": 17,
+            "num_docs": 3
+        },
+        "payment": {
+            "term_frequency": 32,
+            "num_docs": 5
+        },
+        "business": {
+            "term_frequency": 50,
+            "num_docs": 6
+        }
+    }
+    print(repr(content.get_relevant_urls(test_user)))
+
+
+def content_test_suite():
+    test_get_stats()
+    test_get_urls()
+
+
 def main():
     db_test_suite()
+    content_test_suite()
 
 main()
