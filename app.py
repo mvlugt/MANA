@@ -29,6 +29,8 @@ def verify():
 @app.route('/', methods=['POST'])
 def webhook():
 
+    # list of Article URLS, as a default this should start with our "seed" urls
+    ARTICLES = ["http://www.cnn.com/2016/12/06/politics/obama-trump-terrorism-views/index.html", "http://www.cnn.com/2016/12/06/entertainment/grammy-nominations-2017/index.html"]
     data = request.get_json()
     log(data) 
 
@@ -66,7 +68,7 @@ def webhook():
                             db.update_stats(sender_id, key_words)
                         
                         # This should reflect the updated user profile
-                        ARTICLES = get_relevant_urls(user)
+                        ARTICLES = content.get_relevant_urls(user)
 
 
                         send_message(sender_id, "I found these articles I thought you might like. As always, please let me know which articles interested you most")
