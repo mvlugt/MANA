@@ -70,7 +70,7 @@ def webhook():
                         
                         # This should reflect the updated user profile
                         log("attempting to get relevant urls")
-                        ARTICLES = content.get_top_urls(user)
+                        ARTICLES = content.get_top_urls(ARTICLES, user, 2)
                         log("got articles")
 
                         send_message(sender_id, "I found these articles I thought you might like. As always, please let me know which articles interested you most")
