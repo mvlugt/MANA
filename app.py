@@ -30,7 +30,7 @@ def verify():
 def webhook():
 
     # list of Article URLS, as a default this should start with our "seed" urls
-    ARTICLES = ["http://www.cnn.com/2016/12/06/politics/obama-trump-terrorism-views/index.html", "http://www.cnn.com/2016/12/06/entertainment/grammy-nominations-2017/index.html"]
+    ARTICLES = ["http://www.cnn.com/2016/12/06/politics/obama-trump-terrorism-views/index.html"]
     data = request.get_json()
     log(data) 
 
@@ -45,40 +45,42 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-                    current_user = db.get_user(sender_id)
-                    # If current_user returns null, then this user does not exist in our database yet
-                    if not current_user:
-                        # 1). Create a user
-                        current_user = db.create_user(sender_id)
-                        # 2). Send a lil greeting 
-                        send_message(sender_id, "Hi I'm MANA! Please tell me which of these articles interested you most")
-                        article_list_message = ""
-                        # 3). Send the list of our default initial articles
-                        for i in range(0, len(ARTICLES)):
-                            article_list_message += (str(i) + ": " + ARTICLES[i] + "\n")
-                        send_message(sender_id, article_list_message)
-                    else:
-                        # Get the numbers of the article the user likes
-                        articles_user_likes = [int(s) for s in message_text.split() if s.isdigit()]
-                        send_message(sender_id, "Thanks for giving me that feedback.")
-                        for index in articles_user_likes:
-                            log("updating user profile")
-                            # For each article the user likes, grab the keywords and update the user profile
-                            url = ARTICLES[index]
-                            key_words = content.get_stats(url)
-                            db.update_stats(sender_id, key_words)
-                        
-                        # This should reflect the updated user profile
-                        log("attempting to get relevant urls")
-                        ARTICLES = content.get_top_urls(ARTICLES, current_user, 2)
-                        log("got articles")
+                if message_text.startswith("hello"):
+                    send_message(sender_id, "Hey There! How can I help you today?")
+                elif message_text.startswith("http:"):
+                    send_message(sender_id, "Great! I'll get to work on that. Any other articles?")
+                elif message_text.startswith("go"):
+                    send_message(sender_id, "Here I go!")
+                    current_user = user.User(1)
+                    current_user.num_docs_liked = 7
+                    current_user.keywords = {
+                        "computer": {
+                            "term_frequency": 10,
+                            "num_docs": 4
+                        },
+                        "technology": {
+                            "term_frequency": 17,
+                            "num_docs": 3
+                        },
+                        "payment": {
+                            "term_frequency": 32,
+                            "num_docs": 5
+                        },
+                        "business": {
+                            "term_frequency": 50,
+                            "num_docs": 6
+                        }
+                    }
+                    # 1). gets quality
 
-                        send_message(sender_id, "I found these articles I thought you might like. As always, please let me know which articles interested you most")
-                        article_list_message = ""
-                        # 3). Send the list of our default initial articles
-                        for i in range(0, len(ARTICLES)):
-                            article_list_message += (str(i) + ": " + ARTICLES[i][1] + "\n")
-                        send_message(sender_id, article_list_message)
+                    # 2). Returns a list of tuples (cosine, url)
+                    results = content.get_top_urls(ARTICLES, current_user, 2)
+                    summary = results[len(results)-1].summary
+                    rel_message = "The article most relevant to you is: \n" + results[len(results)-1][1] + "\nIt has a relevance weight of: " + str(results[len(results)-1][0]) + "\nHere is a little summary: " + summary
+                    send_message(sender_id, rel_message)
+                    
+                else:
+                    send_message(sender_id, "Sorry I'm not very smart yet....can you try saying something else?")
                             
                             
                 if messaging_event.get("delivery"):  # delivery confirmation
