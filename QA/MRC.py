@@ -13,7 +13,7 @@ from sqlalchemy import desc
 import os
 
 #check if db needs to be built (1)
-if not os.path.isfile('./mrc2.db'):
+if not os.path.isfile('/app/QA/mrc2.db'):
     from . import extract
 
 #Run this once before querying DB (2)

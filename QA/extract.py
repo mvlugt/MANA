@@ -58,5 +58,4 @@ for line in f:
     i+=1
 
     if i%1000 == 0:
-        print(i, w)
         session.commit()
