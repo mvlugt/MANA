@@ -13,7 +13,7 @@ from QA import quality
 app = Flask(__name__)
 
 # list of Article URLS, as a default this should start with our "seed" urls
-ARTICLES = ["http://www.cnn.com/2016/12/06/politics/obama-trump-terrorism-views/index.html", "http://www.cnn.com/2016/12/06/entertainment/grammy-nominations-2017/index.html"]
+ARTICLES = ["https://techcrunch.com/2016/12/08/uber-spells-out-what-causes-riders-to-lose-access-in-new-policy/", "http://www.cnn.com/2016/12/06/entertainment/grammy-nominations-2017/index.html", "http://www.dailytimesgazette.com/36308-2/36308/"]
 
 @app.route('/', methods=['GET'])
 def verify():
