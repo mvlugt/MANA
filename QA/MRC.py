@@ -14,7 +14,7 @@ import os
 
 #check if db needs to be built (1)
 if not os.path.isfile('./mrc2.db'):
-    import extract
+    import .extract
 
 #Run this once before querying DB (2)
 #Return a session with the db
