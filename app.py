@@ -45,11 +45,11 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-                if message_text.startswith("hello"):
+                if message_text.lower().startswith("hello"):
                     send_message(sender_id, "Hey There! How can I help you today?")
-                elif message_text.startswith("http:"):
+                elif message_text.lower().startswith("http:"):
                     send_message(sender_id, "Great! I'll get to work on that. Any other articles?")
-                elif message_text.startswith("go"):
+                elif message_text.lower()startswith("go"):
                     send_message(sender_id, "Here I go!")
                     current_user = user.User(1)
                     current_user.num_docs_liked = 7
@@ -71,13 +71,16 @@ def webhook():
                             "num_docs": 6
                         }
                     }
-                    # 1). gets quality
 
+                    log(str(current_user.keywords))
+                    # 1). gets quality
+                    quality_articles = 
+                    
                     # 2). Returns a list of tuples (cosine, url)
-                    results = content.get_top_urls(ARTICLES, current_user, 2)
+                    results = content.__top_n_articles(quality_articles, current_user, 2)
                     # summary = results[len(results)-1].summary
                     summary = "Jk"
-                    rel_message = "The article most relevant to you is: \n" + results[len(results)-1][1] + "\nIt has a relevance weight of: " + str(results[len(results)-1][0]) + "\nHere is a little summary: " + summary
+                    rel_message = "The article most relevant to you is: \n" + results[len(results)-1][1] + "\nIt has a relevance weight of: " + str(results[len(results)-1][0]) + "\n\nHere is a little summary: " + summary
                     send_message(sender_id, rel_message)
                     
                 else:
