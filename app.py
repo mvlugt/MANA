@@ -70,13 +70,13 @@ def webhook():
                         
                         # This should reflect the updated user profile
                         log("attempting to get relevant urls")
-                        ARTICLES = content.get_relevant_urls(user)
+                        ARTICLES = content.get_top_urls(user)
                         log("got articles")
 
                         send_message(sender_id, "I found these articles I thought you might like. As always, please let me know which articles interested you most")
                         article_list_message = ""
                         # 3). Send the list of our default initial articles
-                        for i in range(0, len(new_recs)):
+                        for i in range(0, len(ARTICLES)):
                             article_list_message += (str(i) + ": " + ARTICLES[i] + "\n")
                         send_message(sender_id, article_list_message)
                             
