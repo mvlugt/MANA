@@ -75,7 +75,8 @@ def webhook():
 
                     # 2). Returns a list of tuples (cosine, url)
                     results = content.get_top_urls(ARTICLES, current_user, 2)
-                    summary = results[len(results)-1].summary
+                    # summary = results[len(results)-1].summary
+                    summary = "Jk"
                     rel_message = "The article most relevant to you is: \n" + results[len(results)-1][1] + "\nIt has a relevance weight of: " + str(results[len(results)-1][0]) + "\nHere is a little summary: " + summary
                     send_message(sender_id, rel_message)
                     
