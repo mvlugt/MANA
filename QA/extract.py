@@ -13,7 +13,7 @@ Word.__table__.create(engine, checkfirst=True)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-f = open('app/QA/mrc2.dct', 'r')
+f = open('/app/QA/mrc2.dct', 'r')
 words = {}
 
 i = 0
