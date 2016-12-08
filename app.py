@@ -79,7 +79,7 @@ def webhook():
                     qual_message = "Out of the articles you sent me, \n\thttp://www.cnn.com/2016/12/06/politics/obama-trump-terrorism-views/index.html\n\thttp://www.cnn.com/2016/12/06/entertainment/grammy-nominations-2017/index.html\nseem to be quality articles"
                     
                     # 2). Returns a list of tuples (cosine, url)
-                    results = content.__top_n_articles(ARTICLES, current_user, 2)
+                    results = content.get_top_urls(ARTICLES, current_user, 2)
                     # summary = results[len(results)-1].summary
                     summary = "Jk"
                     rel_message = "The article most relevant to you is: \n\t" + results[len(results)-1][1] + "\nIt has a relevance weight of: " + str(results[len(results)-1][0]) + "\n\nHere is a little summary: " + summary
