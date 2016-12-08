@@ -76,13 +76,12 @@ def webhook():
                     log(str(current_user.keywords))
                     # 1). gets quality
                     #quality_articles = quality.filterArticles(ARTICLES)
-                    qual_message = "Out of the articles you sent me, \n\nhttp://www.cnn.com/2016/12/06/politics/obama-trump-terrorism-views/index.html\n\thttp://www.cnn.com/2016/12/06/entertainment/grammy-nominations-2017/index.html\n\nseem to be quality articles"
+                    qual_message = "Out of the articles you sent me, \n\nhttp://www.cnn.com/2016/12/06/politics/obama-trump-terrorism-views/index.html\nhttp://www.businessinsider.com/amazon-payments-way-ahead-of-apple-and-google-2016-12\n\nseem to be quality articles"
                     send_message(sender_id, qual_message)
                     # 2). Returns a list of tuples (cosine, url)
                     results = content.get_top_urls(ARTICLES, current_user, 2)
                     # summary = results[len(results)-1].summary
-                    summary = "Jk"
-                    rel_message = "The article most relevant to you is: \n\n" + results[len(results)-1][1] + "\n\nIt has a relevance weight of: " + str(results[len(results)-1][0]) + "\n\nHere is a little summary: " + summary
+                    rel_message = "The article most relevant to you is: \n\n" + results[len(results)-1][1] + "\n\nIt has a relevance weight of: " + str(results[len(results)-1][0])
                     send_message(sender_id, rel_message)
                     
                 else:
