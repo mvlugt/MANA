@@ -77,7 +77,7 @@ def webhook():
                         article_list_message = ""
                         # 3). Send the list of our default initial articles
                         for i in range(0, len(ARTICLES)):
-                            article_list_message += (str(i) + ": " + ARTICLES[i] + "\n")
+                            article_list_message += (str(i) + ": " + ARTICLES[i][1] + "\n")
                         send_message(sender_id, article_list_message)
                             
                             
