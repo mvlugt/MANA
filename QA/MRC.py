@@ -4,7 +4,7 @@ this script:
     2. connects to db for querying
     3. provides a nice querying abstraction
 """
-from wordmodel import Word
+from .wordmodel import Word
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker

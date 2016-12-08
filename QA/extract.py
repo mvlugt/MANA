@@ -1,4 +1,4 @@
-from wordmodel import Word
+from .wordmodel import Word
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker

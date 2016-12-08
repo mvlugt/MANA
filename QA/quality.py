@@ -3,8 +3,8 @@ from sklearn.svm import SVC
 from sklearn.externals import joblib
 from newspaper import Article
 
-from MRC import setupDB
-from MRC import queryDB
+from .MRC import setupDB
+from .MRC import queryDB
 import re
 from sklearn.tree import DecisionTreeClassifier
 
