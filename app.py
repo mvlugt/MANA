@@ -50,7 +50,7 @@ def webhook():
                     send_message(sender_id, "Hey There! How can I help you today?")
                 elif message_text.lower().startswith("http:"):
                     send_message(sender_id, "Great! I'll get to work on that. Any other articles?")
-                elif message_text.lower()startswith("go"):
+                elif message_text.lower().startswith("go"):
                     send_message(sender_id, "Here I go!")
                     current_user = user.User(1)
                     current_user.num_docs_liked = 7
