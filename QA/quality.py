@@ -10,7 +10,7 @@ from sklearn.tree import DecisionTreeClassifier
 
 
 def filterArticles(article_urls):
-    classifier = joblib.load("quality.pkl")
+    classifier = joblib.load("/app/QA/quality.pkl")
     dummy = open("dummy.txt", "w")
     dummy_sesion = setupDB()
     articles = parseUrls(article_urls)
