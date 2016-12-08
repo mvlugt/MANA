@@ -8,6 +8,7 @@ from flask import Flask, request
 root = str(Path(__file__).resolve().parents[1])
 sys.path.append(root)
 from manapotion import user, db, content
+from QA import quality
 
 app = Flask(__name__)
 
@@ -74,7 +75,7 @@ def webhook():
 
                     log(str(current_user.keywords))
                     # 1). gets quality
-                    quality_articles = 
+                    quality_articles = QA.filterArticles(ARTICLES)
                     
                     # 2). Returns a list of tuples (cosine, url)
                     results = content.__top_n_articles(quality_articles, current_user, 2)
