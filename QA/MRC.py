@@ -19,7 +19,7 @@ if not os.path.isfile('/app/QA/mrc2.db'):
 #Run this once before querying DB (2)
 #Return a session with the db
 def setupDB():
-    engine = create_engine('sqlite:///app/QA/mrc2.db')
+    engine = create_engine('sqlite:////app/QA/mrc2.db')
     Session = sessionmaker(bind = engine)
     return Session()
 
