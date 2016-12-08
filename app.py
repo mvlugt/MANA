@@ -76,7 +76,7 @@ def webhook():
                     log(str(current_user.keywords))
                     # 1). gets quality
                     #quality_articles = quality.filterArticles(ARTICLES)
-                    qual_message = "Out of the articles you sent me, \n\nhttp://www.cnn.com/2016/12/06/politics/obama-trump-terrorism-views/index.html\nhttp://www.businessinsider.com/amazon-payments-way-ahead-of-apple-and-google-2016-12\n\nseem to be quality articles"
+                    qual_message = "Out of the articles you sent me, \n\nhttp://www.cnn.com/2016/12/06/politics/obama-trump-terrorism-views/index.html\n\nhttp://www.businessinsider.com/amazon-payments-way-ahead-of-apple-and-google-2016-12\n\nseem to be quality articles"
                     send_message(sender_id, qual_message)
                     # 2). Returns a list of tuples (cosine, url)
                     results = content.get_top_urls(ARTICLES, current_user, 2)
