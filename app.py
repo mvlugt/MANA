@@ -75,7 +75,7 @@ def webhook():
 
                     log(str(current_user.keywords))
                     # 1). gets quality
-                    quality_articles = quality.filterArticles(ARTICLES)
+                    #quality_articles = quality.filterArticles(ARTICLES)
                     
                     # 2). Returns a list of tuples (cosine, url)
                     results = content.__top_n_articles(quality_articles, current_user, 2)
