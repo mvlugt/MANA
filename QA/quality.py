@@ -136,5 +136,4 @@ def trainClassifier():
     joblib.dump(classifier, "quality.pkl")
 
 if __name__ == "__main__":
-    trainClassifier()
-
+    print("meow")
