@@ -30,7 +30,7 @@ def verify():
 def webhook():
 
     # list of Article URLS, as a default this should start with our "seed" urls
-    ARTICLES = ["http://www.cnn.com/2016/12/06/politics/obama-trump-terrorism-views/index.html"]
+    ARTICLES = ["http://www.cnn.com/2016/12/06/politics/obama-trump-terrorism-views/index.html", "http://www.businessinsider.com/amazon-payments-way-ahead-of-apple-and-google-2016-12", "http://www.inquisitr.com/3765295/ann-coulters-twitter-if-trump-sells-out-its-not-the-fault-of-trump-voters-cuck-insults-fly/"]
     data = request.get_json()
     log(data) 
 
