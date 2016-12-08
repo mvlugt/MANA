@@ -9,6 +9,20 @@ import re
 from sklearn.tree import DecisionTreeClassifier
 
 
+def filterArticles(article_urls):
+    classifier = joblib.load("quality.pkl")
+    dummy = open("dummy.txt", "w")
+    dummy_sesion = setupDB()
+    articles = parseUrls(article_urls)
+    features = extractFeatures(articles, dummy_sesion, dummy)
+    quality_predictions = classifier.predict(features)
+    to_return = []
+    for index, prediction in enumerate(quality_predictions):
+        if prediction:
+            to_return.append(articles[index])
+    return to_return
+
+
 def getArticles(mode):
     articleList = []
 
@@ -93,7 +107,7 @@ def trainClassifier():
     gOut = open("goodFeatures.txt", "w")
 
     featureVector = (extractFeatures(badArticles, session, bOut) + \
-            extractFeatures(goodArticles, session, gOut)
+            extractFeatures(goodArticles, session, gOut))
 
     classifier = DecisionTreeClassifier()
     #uncomment below for 5 fold, if doing this testing you need to balance feature vector above
@@ -123,3 +137,4 @@ def trainClassifier():
 
 if __name__ == "__main__":
     trainClassifier()
+
