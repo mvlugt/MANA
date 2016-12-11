@@ -38,15 +38,10 @@ def parseUrls(articleUrls):
     for url in articleUrls:
         if url.endswith('\n'): url = url[:-1]
         article = Article(url)
-
-        article.download()
-        if article.html == "":
-            print(url)
-            continue
-
-        article.parse()
-        if article.text == "":
-            print (url)
+        try:
+            article.download()
+            article.parse()
+        except:
             continue
         parsedArticles.append(article)
     return parsedArticles
