@@ -13,13 +13,13 @@ from sqlalchemy import desc
 import os
 
 #check if db needs to be built (1)
-if not os.path.isfile('/app/QA/mrc2.db'):
+if not os.path.isfile('./QA/mrc2.db'):
     from . import extract
 
 #Run this once before querying DB (2)
 #Return a session with the db
 def setupDB():
-    engine = create_engine('sqlite:////app/QA/mrc2.db')
+    engine = create_engine('sqlite:///./QA/mrc2.db')
     Session = sessionmaker(bind = engine)
     return Session()
 
