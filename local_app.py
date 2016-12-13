@@ -53,7 +53,8 @@ def main():
             go_on = False
 
     # If they do exist, send them some articles they may like and ask for feedback
-    else: 
+    else:
+        go_on = True
         print("Welcome back " + name)
         print ("Here are some articles I think you might like: ")
     
