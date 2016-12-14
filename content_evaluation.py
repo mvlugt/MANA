@@ -85,6 +85,8 @@ def evaluate_model(participants):
     round_total = [0 for x in range(1, rounds)]
     total = 0
     correct = 0
+    participant_distances = [[] for participant in participants]
+    participant_count = 0
     for participant in participants:
         for i in range(1, rounds):
             predicted_url = content.get_top_urls(urls[i], participant.users[i - 1], 1)[0]
@@ -92,12 +94,18 @@ def evaluate_model(participants):
             if participant.url_ranks[i][predicted_index] == 1:
                 round_correct[i - 1] += 1
                 correct += 1
+            participant_distances[participant_count].append(pow(participant.url_ranks[i][predicted_index] - 1, 2))
             round_total[i - 1] += 1
             total += 1
+        participant_count += 1
     total_accuracy = float(correct) / float(total)
     round_accuracies = [float(round_correct[i]) / float(round_total[i]) for i in range(len(round_correct))]
+    normalized_rmses = [pow((1 / float(rounds - 1)) * sum(distances), 1/float(2)) / float(2) for distances in participant_distances]
+    average_rms = sum(normalized_rmses) / float(len(participants))
     print(repr(total_accuracy))
     print(repr(round_accuracies))
+    print(repr(normalized_rmses))
+    print(repr(average_rms))
     return total_accuracy, round_accuracies
 
 
