@@ -29,6 +29,15 @@ download sqlAlchemy
 http://www.sqlalchemy.org/download.html
 ```
 
+download scikit-learn
+```
+pip install -U scikit-learn
+```
+if missing numPy and sciPy
+```
+pip install -U scikit-learn[alldeps]
+```
+
 #Messenger Bot Set Up
 1). Create a working endpoint that can return a 200 response code and can verify your bot with Facebook
 2). Create a Facebook page for your bot
