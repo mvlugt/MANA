@@ -9,9 +9,6 @@ sys.path.append(root)
 from manapotion import user, db, content
 from QA import quality
 
-# list of Article URLS, as a default this should start with our "seed" urls
-
-
 
 def send_articles(ARTICLES):
     article_message =  ""
