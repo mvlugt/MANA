@@ -1,5 +1,23 @@
 #**MANA: My Adaptive News Aggregator**
 
+MANA is an adaptive news aggregator built for the University of Michigan, EECS 498 - Natural Lanuage Processing. It takes in news articles and serves you back articles that you would want to read! It also learns from what you like to try and serve you better news over time.
+
+##**System Overview**
+
+####1) Quality filter
+
+The code for the quality filter can be found in QA/quality.py. The code build and trains the classifier that we use for filter quality articles. Please do not run this file as it will ruin the uploaded classifier!
+
+####2) Relevence Ranking
+
+The relevence ranking code can be found in manapotion/content.py. This file exposes methods to get relevence rankings for a list of news articles. It depends on db.py and user.py.
+
+
+####3) Facebook messenger
+
+The chatbot code can be found in app.py and is a Flask application. This code uses the classifer provided from QA/quality.py and uses the methods exposed in manapotion/content.py. It receives and sends messages to the Facebook webhooks to communicate with a user. 
+
+
 ##*NewsPaper Setup - for OSX *
 Using Homebrew or Macports
 
