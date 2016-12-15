@@ -1,12 +1,21 @@
 # defines the User class
 import math
-
+import copy
 
 class User:
     def __init__(self, fb_id):
         self.fb_id = fb_id
         self.keywords = {}
         self.num_docs_liked = 0
+
+    def __deepcopy__(self, memodict={}):
+        m_user = User(self.fb_id)
+        m_user.keywords = copy.deepcopy(self.keywords)
+        m_user.num_docs_liked = self.num_docs_liked
+        return m_user
+
+    def __repr__(self):
+        return '(' + str(self.fb_id) + ', ' + repr(self.keywords) + ', ' + str(self.num_docs_liked) + ')'
 
     def update_stats(self, keywords):
         for word in keywords:
