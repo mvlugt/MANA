@@ -45,7 +45,11 @@ pip install -U scikit-learn[alldeps]
 3). Create and register a Facebook App for your Bot
 ```
 #Running The Code Locally
-local_app.py will simulate our processes without the Facebook Messenger Bot interface. To run local_app.py, please clone our directory, download all the dependencies, and run
+local_app.py will simulate our processes without the Facebook Messenger Bot interface. To run local_app.py, please clone our directory, download all the dependencies, and run in two separate terminals first:
+```
+mongod
+```
+followed by:
 ```
 python3 local_app.py
 ```
