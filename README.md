@@ -39,7 +39,15 @@ pip install -U scikit-learn[alldeps]
 ```
 
 #Messenger Bot Set Up
+```
 1). Create a working endpoint that can return a 200 response code and can verify your bot with Facebook
 2). Create a Facebook page for your bot
-3). Create and register a Facebook App for your Bot
+3). Create and register a Facebook App for your Bot```
+```
+#Running The Code Locally
+app_local.py will simulate our processes without the Facebook Messenger Bot interface. To run app_local.py, please clone our directory, download all the dependencies, and run
+```
+python3 app_local.py
+```
+Once you enter your name, you will be prompted with some initial articles. When MANA asks for feedback, your response should include the numbers corresponding to the articles you were most intersted in. To continue using MANA, respond "yes" when she asks if you would like to continue using her. Enjoy!
 
